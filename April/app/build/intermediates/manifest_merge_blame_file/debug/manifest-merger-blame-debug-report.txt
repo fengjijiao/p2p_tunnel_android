@@ -1,0 +1,59 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="us.syh.april"
+4    android:versionCode="2"
+5    android:versionName="0.002" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="27"
+8-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:5:5-67
+11-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:6:5-79
+12-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:7:5-80
+13-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:7:22-78
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:8:5-79
+14-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:8:22-77
+15
+16    <application
+16-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:10:5-24:19
+17        android:allowBackup="true"
+17-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:11:9-35
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.1.0] C:\Users\jijiao\.gradle\caches\transforms-2\files-2.1\e9dab9c67c1ee3668e0bbf86c6d8cbd8\core-1.1.0\AndroidManifest.xml:24:18-86
+19        android:debuggable="true"
+20        android:icon="@mipmap/ic_launcher"
+20-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:12:9-43
+21        android:label="@string/app_name"
+21-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:13:9-41
+22        android:roundIcon="@mipmap/ic_launcher_round"
+22-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:14:9-54
+23        android:supportsRtl="true"
+23-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:15:9-35
+24        android:theme="@style/AppTheme" >
+24-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:16:9-40
+25        <activity android:name="us.syh.april.MainActivity" >
+25-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:17:9-23:20
+25-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:17:19-47
+26            <intent-filter>
+26-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:18:13-22:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:19:17-69
+27-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:19:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:21:17-77
+29-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:21:27-74
+30            </intent-filter>
+31        </activity>
+32    </application>
+33
+34</manifest>
