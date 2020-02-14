@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.king.app:app-dialog:1.0.8-androidx@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/312e2803ac4dd1e2f6f52b65871a253f/app-dialog-1.0.8-androidx/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/312e2803ac4dd1e2f6f52b65871a253f/app-dialog-1.0.8-androidx/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.king.app/app-dialog/1.0.8-androidx/55ead48142b551820a366a496565673cea17a5da/app-dialog-1.0.8-androidx-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.king.app/app-dialog/1.0.8-androidx/3dbaf75f77fd03db3a12cc1820ddda13a093fd2a/app-dialog-1.0.8-androidx-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

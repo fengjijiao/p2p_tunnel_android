@@ -1,16 +1,20 @@
 package us.syh.april;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Base64;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.crypto.tink.Aead;
 import com.google.crypto.tink.CleartextKeysetHandle;
@@ -28,6 +32,9 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import us.syh.april.utility.FileOperater;
+import us.syh.april.utility.SocketOperater;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int MESSAGE_READ = 1;
@@ -36,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     Aead serverAead, peerAead;
     EditText editText_message, editText_localKey, editText_peerKey;
     TextView textView_showMessage;
-    Button button_send, button_connectServer, button_exit;
+    Button button_send, button_connectServer, button_exit, button_initkeyset;
+
     private SocketOperater udpSocket;
     String remoteAddress = "120.79.165.97:9000";
     String remoteCryptKey = "defaultremotekey";
@@ -56,17 +64,21 @@ public class MainActivity extends AppCompatActivity {
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
-        serverKeysetHandle = getOrgenerateKeyset("server_keyset.json");
-        peerKeysetHandle = getOrgenerateKeyset("peer_keyset.json");
+        serverKeysetHandle = getOrgenerateKeyset("keyset/server_keyset.json");
+        peerKeysetHandle = getOrgenerateKeyset("keyset/peer_keyset.json");
         try {
             peerAead = peerKeysetHandle.getPrimitive(Aead.class);
             serverAead = serverKeysetHandle.getPrimitive(Aead.class);
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
+        initUpdate();
         initView();
         initOnClick();
         setupChat();
+    }
+
+    private void initUpdate() {
     }
 
     private void initView() {
@@ -77,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         button_send = findViewById(R.id.button_send);
         button_connectServer = findViewById(R.id.button_connectServer);
         button_exit = findViewById(R.id.button_exit);
+        button_initkeyset = findViewById(R.id.button_initkeyset);
     }
 
     private void initOnClick() {
@@ -104,11 +117,21 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        button_initkeyset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initKeyset();
+            }
+        });
     }
 
     private void setupChat() {
         udpSocket = new SocketOperater(mHandler, 1999);
         udpSocket.startRecv();// 开始监听
+    }
+
+    private void initKeyset() {
+        FileOperater.putAssetsToSDCard(getApplicationContext(),"keyset", FileOperater.FilesDir);
     }
 
     private void sendPingPacket(){
@@ -191,11 +214,16 @@ public class MainActivity extends AppCompatActivity {
 
     private KeysetHandle getOrgenerateKeyset(String fileName) {
         if(FileOperater.isFileExists(FileOperater.FilesDir, fileName)) {
+            File file = new File(FileOperater.FilesDir + fileName);
+            String md5 = FileOperater.getFileMD5(file);
+            System.out.println("校验码：" + md5);
+            Toast.makeText(MainActivity.this, "校验码：" + md5, Toast.LENGTH_LONG).show();
             return loadKeyset(fileName);
         }else {
             return saveKeyset(genKeyset(), fileName);
         }
     }
+
     private KeysetHandle genKeyset() {
         KeyTemplate keyTemplate = AeadKeyTemplates.AES128_GCM;
         try {
@@ -205,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
+
     private KeysetHandle saveKeyset(KeysetHandle keysetHandle, String keysetFilename) {
         // and write it to a file.
         try {
@@ -229,6 +258,35 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getAppVersionName(Context context) {
+        String versionName = "";
+        try {
+            // ---get the package info---
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionName = pi.versionName;
+            if (versionName == null || versionName.length() <= 0) {
+                return "";
+            }
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versionName;
+    }
+
+    public static int getAppVersionCode(Context context) {
+        int versionCode = 0;
+        try {
+            // ---get the package info---
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionCode = pi.versionCode;
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versionCode;
     }
 
     private static String base64Encode(byte[] input) {

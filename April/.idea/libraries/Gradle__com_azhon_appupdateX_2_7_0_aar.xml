@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.azhon:appupdateX:2.7.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0c932d36f4e4eb45f5a0ad4654a84e31/appupdateX-2.7.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0c932d36f4e4eb45f5a0ad4654a84e31/appupdateX-2.7.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.azhon/appupdateX/2.7.0/b73e73c9e69e321b680822d27970456bf417723e/appupdateX-2.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

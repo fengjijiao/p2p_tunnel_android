@@ -744,6 +744,7 @@ id bottom
 id buttonPanel
 id button_connectServer
 id button_exit
+id button_initkeyset
 id button_send
 id center_vertical
 id chains

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.qmuiteam:arch-annotation:2.0.0-alpha02@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.qmuiteam/arch-annotation/2.0.0-alpha02/f74ee65c5c643b4c6c01a1ca823fa37802213aa6/arch-annotation-2.0.0-alpha02.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.qmuiteam/arch-annotation/2.0.0-alpha02/207aa360f010aaf7084a169de39b9fb5a627b9d8/arch-annotation-2.0.0-alpha02-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.qmuiteam/arch-annotation/2.0.0-alpha02/8ee8ed132409c030f6be30b232e9984a549d91ca/arch-annotation-2.0.0-alpha02-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
