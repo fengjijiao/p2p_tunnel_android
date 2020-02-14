@@ -1,0 +1,6 @@
+{
+  "version_code": 2,
+  "version_name": "0.002",
+  "apk_file_url": "https://github.com/fengjijiao/p2p_tunnel_android/releases/download/v0.002/app-debug.apk",
+  "update_log": "1，添加端对端加密支持。\r\n2，添加导入密匙支持。"
+}
