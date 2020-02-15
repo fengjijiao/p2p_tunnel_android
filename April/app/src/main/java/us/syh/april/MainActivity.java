@@ -1,5 +1,6 @@
 package us.syh.april;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -29,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FileOperater.setFilesDir(getExternalFilesDir("").getAbsolutePath());
+        FileOperater.setFilesDir(Objects.requireNonNull(getExternalFilesDir("")).getAbsolutePath());
         //aead crypto init
         try {
             AeadConfig.register();
@@ -152,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // handler用于Activity之间传递消息
+    @SuppressLint("HandlerLeak")
     private final Handler mHandler=new Handler(){
         @Override
         public void handleMessage(Message msg){
@@ -159,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 case MESSAGE_WRITE:
                     byte[]writeBuf =(byte[])msg.obj;
                     String writeMessage=new String(writeBuf);
-                    writeMessage = new String(deCrypto(isServered ? serverAead : peerAead, base64Decode(writeMessage), isServered ? remoteCryptKey.getBytes() : peerCryptKey.getBytes()));
+                    writeMessage = new String(Objects.requireNonNull(deCrypto(isServered ? serverAead : peerAead, base64Decode(writeMessage), isServered ? remoteCryptKey.getBytes() : peerCryptKey.getBytes())));
                     if(!writeMessage.equals("ping")) {
                         updateMessage(new Date().toString() + " 我： " + writeMessage);
                     }
@@ -169,9 +172,9 @@ public class MainActivity extends AppCompatActivity {
                 case MESSAGE_READ:
                     byte[]readBuf =(byte[])msg.obj;
                     String readMessage=new String(readBuf,0,msg.arg1);
-                    readMessage = new String(deCrypto(isServered ? serverAead : peerAead, base64Decode(readMessage), isServered ? remoteCryptKey.getBytes() : peerCryptKey.getBytes()));
+                    readMessage = new String(Objects.requireNonNull(deCrypto(isServered ? serverAead : peerAead, base64Decode(readMessage), isServered ? remoteCryptKey.getBytes() : peerCryptKey.getBytes())));
                     //if(readMessage == null) break;
-                    if(isServered && readMessage.indexOf(":") != -1) {
+                    if(isServered && readMessage.contains(":")) {
                         peerAddress = readMessage;
                         isServered = false;
                         updateMessage(new Date().toString() + " 建立点对点连接成功！");
@@ -186,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("SetTextI18n")
     private void updateMessage(String message) {
         textView_showMessage.setText(textView_showMessage.getText().toString() + "\n" + message);
     }

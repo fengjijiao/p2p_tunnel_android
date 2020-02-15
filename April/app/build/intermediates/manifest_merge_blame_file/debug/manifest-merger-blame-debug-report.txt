@@ -38,23 +38,22 @@
 22-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:14:9-54
 23        android:supportsRtl="true"
 23-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:15:9-35
-24        android:testOnly="true"
-25        android:theme="@style/AppTheme" >
-25-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:16:9-40
-26        <activity android:name="us.syh.april.MainActivity" >
-26-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:17:9-23:20
-26-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:17:19-47
-27            <intent-filter>
-27-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:18:13-22:29
-28                <action android:name="android.intent.action.MAIN" />
-28-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:19:17-69
-28-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:19:25-66
-29
-30                <category android:name="android.intent.category.LAUNCHER" />
-30-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:21:17-77
-30-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:21:27-74
-31            </intent-filter>
-32        </activity>
-33    </application>
-34
-35</manifest>
+24        android:theme="@style/AppTheme" >
+24-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:16:9-40
+25        <activity android:name="us.syh.april.MainActivity" >
+25-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:17:9-23:20
+25-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:17:19-47
+26            <intent-filter>
+26-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:18:13-22:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:19:17-69
+27-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:19:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:21:17-77
+29-->E:\AndroidStudioProjects\April\app\src\main\AndroidManifest.xml:21:27-74
+30            </intent-filter>
+31        </activity>
+32    </application>
+33
+34</manifest>
