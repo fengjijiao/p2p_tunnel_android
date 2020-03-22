@@ -1,94 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/body_background"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText_message"
-        android:layout_width="271dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="消息"
-        android:inputType="text"
-        android:text="你好！"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <Button
-        android:id="@+id/button_send"
-        android:layout_width="107dp"
-        android:layout_height="61dp"
-        android:text="发送"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editText_message"
-        app:layout_constraintTop_toTopOf="@+id/editText_message" />
-
-    <EditText
-        android:id="@+id/editText_localKey"
-        android:layout_width="105dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:hint="LK"
-        android:inputType="text"
-        android:text="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_message" />
-
-    <EditText
-        android:id="@+id/editText_peerKey"
-        android:layout_width="105dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="24dp"
-        android:ems="10"
-        android:hint="PK"
-        android:inputType="text"
-        android:text="1"
-        app:layout_constraintStart_toEndOf="@+id/editText_localKey"
-        app:layout_constraintTop_toBottomOf="@+id/editText_message" />
-
-    <Button
-        android:id="@+id/button_connectServer"
-        android:layout_width="107dp"
-        android:layout_height="61dp"
-        android:text="连接"
-        app:layout_constraintEnd_toEndOf="@+id/button_send"
-        app:layout_constraintHorizontal_bias="0.433"
-        app:layout_constraintStart_toEndOf="@+id/editText_message"
-        app:layout_constraintTop_toTopOf="@+id/editText_peerKey" />
-
-    <Button
-        android:id="@+id/button_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="退出"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_localKey" />
-
-    <Button
-        android:id="@+id/button_initkeyset"
-        android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_marginStart="16dp"
-        android:text="导入密匙"
-        app:layout_constraintStart_toEndOf="@+id/button_exit"
-        app:layout_constraintTop_toTopOf="@+id/button_exit" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/item_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="377dp"
-        android:layout_height="446dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,9 +24,70 @@
             <TextView
                 android:id="@+id/textView_showMessage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="消息" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editText_message"
+                    android:layout_width="298dp"
+                    android:layout_height="53dp"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:hint="消息"
+                    android:inputType="text"
+                    android:text="你好！"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/button_send"
+                    android:layout_width="107dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:text="发送" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="4">
+
+                <EditText
+                    android:id="@+id/editText_localKey"
+                    android:layout_width="105dp"
+                    android:layout_height="53dp"
+                    android:layout_weight="1.5"
+                    android:ems="10"
+                    android:hint="LK"
+                    android:inputType="text"
+                    android:text="0" />
+
+                <EditText
+                    android:id="@+id/editText_peerKey"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:ems="10"
+                    android:hint="PK"
+                    android:inputType="text"
+                    android:text="1" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/button_connectServer"
+                    android:layout_width="107dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:text="连接" />
+            </TableRow>
+
         </LinearLayout>
     </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

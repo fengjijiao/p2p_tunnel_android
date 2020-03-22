@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="body_background">#FFFFFF</color>
+    <color name="bar_divider">#D4D6D8</color>
+    <color name="tab_panel_bg">@color/colorPrimary</color>
+    <color name="default_text_color">#000000</color>
 </resources>

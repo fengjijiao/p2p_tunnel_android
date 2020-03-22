@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">April</string>
+    <!-- 关于界面 -->
+    <string name="about">关于</string>
+    <string name="about_item_homepage">访问官网</string>
+    <string name="about_item_github">GitHub</string>
+    <string name="about_item_opensource">开放源代码</string>
+    <string name="about_item_giant">站在巨人肩膀上</string>
+    <string name="about_copyright">© %1$s SYH All rights reserved.</string>
+    <!-- 密匙管理界面 -->
+    <string name="key_management">密匙管理</string>
+    <!-- 主界面 -->
+    <string name="import_keyset">导入测试密匙</string>
+    <string name="logout">退出</string>
+    <!-- 设置界面 -->
+    <string name="setting">设置</string>
 </resources>

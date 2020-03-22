@@ -2,6 +2,7 @@ package us.syh.april;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.crypto.tink.Aead;
 import com.google.crypto.tink.CleartextKeysetHandle;
@@ -25,6 +27,10 @@ import com.google.crypto.tink.KeysetHandle;
 import com.google.crypto.tink.aead.AeadConfig;
 import com.google.crypto.tink.aead.AeadKeyTemplates;
 import com.google.crypto.tink.proto.KeyTemplate;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.util.QMUIViewHelper;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
     Aead serverAead, peerAead;
     EditText editText_message, editText_localKey, editText_peerKey;
     TextView textView_showMessage;
-    Button button_send, button_connectServer, button_exit, button_initkeyset;
+    Button button_send, button_connectServer, button_exit, button_initkeyset, button_keymanager;
+    QMUITopBarLayout topbar;
 
     private SocketOperater udpSocket;
     String remoteAddress = "120.79.165.97:9000";
@@ -58,7 +65,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        QMUIStatusBarHelper.translucent(this);
         setContentView(R.layout.activity_main);
+        initUpdate();
+        initView();
+        initTopBar();
         FileOperater.setFilesDir(Objects.requireNonNull(getExternalFilesDir("")).getAbsolutePath());
         //aead crypto init
         try {
@@ -74,24 +85,60 @@ public class MainActivity extends AppCompatActivity {
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
-        initUpdate();
-        initView();
         initOnClick();
         setupChat();
+    }
+
+    private void initTopBar() {
+        //topbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        topbar.setTitle(getResources().getString(R.string.app_name)).setTextColor(ContextCompat.getColor(this,R.color.qmui_config_color_white));
+        topbar.addRightImageButton(R.mipmap.icon_topbar_overflow, QMUIViewHelper.generateViewId())
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showMoreSheetList();
+                    }
+                });
+    }
+
+    private void showMoreSheetList() {
+        new QMUIBottomSheet.BottomListSheetBuilder(this)
+                .addItem(getResources().getString(R.string.key_management))
+                .addItem(getResources().getString(R.string.import_keyset))
+                .addItem(getResources().getString(R.string.setting))
+                .addItem(getResources().getString(R.string.logout))
+                .setOnSheetItemClickListener(new QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
+                        if (position == 0) {
+                            Intent intent = new Intent();
+                            intent.setClass(MainActivity.this,GenKeyActivity.class);
+                            startActivity(intent);
+                        }else if(position == 1) {
+                            initKeyset();
+                        }else if(position == 2) {
+                            //
+                        }else if(position ==3) {
+                            finish();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .build()
+                .show();
     }
 
     private void initUpdate() {
     }
 
     private void initView() {
+        topbar = findViewById(R.id.topbar);
         editText_message = findViewById(R.id.editText_message);
         editText_localKey = findViewById(R.id.editText_localKey);
         editText_peerKey = findViewById(R.id.editText_peerKey);
         textView_showMessage = findViewById(R.id.textView_showMessage);
         button_send = findViewById(R.id.button_send);
         button_connectServer = findViewById(R.id.button_connectServer);
-        button_exit = findViewById(R.id.button_exit);
-        button_initkeyset = findViewById(R.id.button_initkeyset);
     }
 
     private void initOnClick() {
@@ -113,18 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 udpSocket.Send(base64Encode(enCrypto(serverAead,(editText_localKey.getText().toString() + "|" + editText_peerKey.getText().toString()).getBytes(), remoteCryptKey.getBytes())), addr[0], Integer.parseInt(addr[1]));
             }
         });
-        button_exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        button_initkeyset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initKeyset();
-            }
-        });
     }
 
     private void setupChat() {
@@ -134,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initKeyset() {
         FileOperater.putAssetsToSDCard(getApplicationContext(),"keyset", FileOperater.FilesDir);
+        Toast.makeText(MainActivity.this, "导入完成！", Toast.LENGTH_LONG).show();
     }
 
     private void sendPingPacket(){
@@ -218,10 +254,6 @@ public class MainActivity extends AppCompatActivity {
 
     private KeysetHandle getOrgenerateKeyset(String fileName) {
         if(FileOperater.isFileExists(FileOperater.FilesDir, fileName)) {
-            File file = new File(FileOperater.FilesDir + fileName);
-            String md5 = FileOperater.getFileMD5(file);
-            System.out.println("校验码：" + md5);
-            Toast.makeText(MainActivity.this, "校验码：" + md5, Toast.LENGTH_LONG).show();
             return loadKeyset(fileName);
         }else {
             return saveKeyset(genKeyset(), fileName);
